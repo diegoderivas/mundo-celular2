@@ -1,36 +1,32 @@
 /* Acceso al DOM */
 const productos = document.getElementById("productos");
-const botonCarrito = document.getElementById("botonCarrito")
+const botonCarrito = document.getElementById("botonCarrito");
+const numeroCarrito = document.getElementById("numeroCarrito");
+const contenidoCarrito = document.getElementById("contenidoCarrito");
+const botonVaciarCarrito = document.getElementById("botonVaciarCarrito");
 
-/* Creación de Clases */
-class Celular {
-  constructor(id,marca,modelo,precio,imagen){
-    this.id = id;
-    this.marca = marca;
-    this.modelo = modelo;
-    this.precio	= precio;
-    this.imagen = imagen;
-  }
+/* Acceso al localStorage */
+let numeroCarritoStorage = JSON.parse(localStorage.getItem("numeroCarritoStorage"));
+let carritoStorage = JSON.parse(localStorage.getItem("carritoStorage"));
+
+/* Inicialización del carrito */
+if (numeroCarritoStorage) {
+  numeroCarrito.innerHTML = numeroCarritoStorage;
+} else {
+  numeroCarrito.innerHTML = 0;
 }
 
-/* Creación de celulares */
-const cel1 = new Celular (1,"Huawei","Mate 30 Pro",799,"https://res.cloudinary.com/dsmpqr05e/image/upload/v1664456489/Mundo%20Celular/Celulares/1-huawei-mate-30-pro_bvplun.png");
-const cel2 = new Celular (2,"Apple","Iphone 13 Pro Max",1200,"https://res.cloudinary.com/dsmpqr05e/image/upload/v1664456489/Mundo%20Celular/Celulares/2-iphone-13-pro-max_j1fcvp.png");
-const cel3 = new Celular (3,"Motorola","Edge 30 Ultra",950,"https://res.cloudinary.com/dsmpqr05e/image/upload/v1664456489/Mundo%20Celular/Celulares/3-motorola-edge-30_ultra_mfucop.png");
-const cel4 = new Celular (4,"Poco","F4 GT",450,"https://res.cloudinary.com/dsmpqr05e/image/upload/v1664456489/Mundo%20Celular/Celulares/4-poco-f4-gt_kabbzn.png");
-const cel5 = new Celular (5,"Samsung","Galaxy S22 Ultra",1000,"https://res.cloudinary.com/dsmpqr05e/image/upload/v1664456489/Mundo%20Celular/Celulares/5-samsung-galaxy-S22-ultra_cwcw4l.png");
-const cel6 = new Celular (6,"Xiaomi","Mi 12",700,"https://res.cloudinary.com/dsmpqr05e/image/upload/v1664456489/Mundo%20Celular/Celulares/6-xiaomi-mi-12_mn9fem.png");
+if (!carritoStorage){
+  carritoStorage = [];
+}
 
-
-/* Creación de arreglos */
-let celulares = [];
-let carrito = [];
-
-celulares.push(cel1,cel2,cel3,cel4,cel5,cel6);
-
+if (parseInt(numeroCarrito.innerHTML) === 0){
+  contenidoCarrito.innerHTML = `<h3>Su carrito está vacío</h3>`;
+} else {
+  renderizarCarrito();
+}
 
 /* Renderizado de celulares */
-
 celulares.forEach(item => {
   let article = document.createElement("article");
   article.innerHTML = `
@@ -48,29 +44,5 @@ celulares.forEach(item => {
   botonAgregarACarrito.addEventListener("click", () => agregarACarrito(item));
 })
 
-/* Funciones */
-const agregarACarrito = producto => {
-  let productoExiste = carrito.find(item => item.id === producto.id);
-  if (!productoExiste){
-    carrito.push({
-      id: producto.id,
-      marca: producto.marca,
-      modelo: producto.modelo,
-      precioUnitario: producto.precio,
-      cantidad: 1,
-      subtotal: producto.precio,
-    })
-  } else{
-    productoExiste.cantidad++;
-    productoExiste.subtotal += productoExiste.precioUnitario;
-  }
-}
-
-const mostrarCarrito = () =>{
-  console.log(carrito);
-  let totalCompra = carrito.reduce((acc,elem) => acc + elem.subtotal,0);
-  console.log(`El total de su compra es US$${totalCompra}`);
-}
-
-/* Evento Mostrar Carrito */
-botonCarrito.addEventListener("click",mostrarCarrito);
+/* Evento vaciar carrito */
+botonVaciarCarrito.addEventListener("click",vaciarCarrito);

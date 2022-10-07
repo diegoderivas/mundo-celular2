@@ -17,8 +17,14 @@ header{
   background-color: #302f4e;
 }
 
+/* Carrito y lupa */
 .carrito{
   font-size: 1.5rem;
+}
+
+.contenidoCarrito{
+  display: flex;
+  flex-direction: column;
 }
 
 /* Footer */
