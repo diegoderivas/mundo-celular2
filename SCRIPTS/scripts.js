@@ -7,24 +7,12 @@ const botonVaciarCarrito = document.getElementById("botonVaciarCarrito");
 
 /* Acceso al localStorage */
 let numeroCarritoStorage = JSON.parse(localStorage.getItem("numeroCarritoStorage"));
-let carritoStorage = JSON.parse(localStorage.getItem("carritoStorage"));
+let carritoStorage = JSON.parse(localStorage.getItem("carritoStorage")) || [];
 
 /* Inicialización del carrito */
-if (numeroCarritoStorage) {
-  numeroCarrito.innerHTML = numeroCarritoStorage;
-} else {
-  numeroCarrito.innerHTML = 0;
-}
+numeroCarritoStorage? numeroCarrito.innerHTML = numeroCarritoStorage : numeroCarrito.innerHTML = 0;
 
-if (!carritoStorage){
-  carritoStorage = [];
-}
-
-if (parseInt(numeroCarrito.innerHTML) === 0){
-  contenidoCarrito.innerHTML = `<h3>Su carrito está vacío</h3>`;
-} else {
-  renderizarCarrito();
-}
+parseInt(numeroCarrito.innerHTML) === 0 ? contenidoCarrito.innerHTML = `<h3>Su carrito está vacío</h3>` : renderizarCarrito();
 
 /* Renderizado de celulares */
 celulares.forEach(item => {
