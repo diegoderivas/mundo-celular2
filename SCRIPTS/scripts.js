@@ -14,6 +14,10 @@ numeroCarritoStorage? numeroCarrito.innerHTML = numeroCarritoStorage : numeroCar
 
 parseInt(numeroCarrito.innerHTML) === 0 ? contenidoCarrito.innerHTML = `<h3>Su carrito está vacío</h3>` : renderizarCarrito();
 
+if (parseInt(numeroCarrito.innerHTML) === 0){
+  botonVaciarCarrito.style.display = "none";
+}
+
 /* Renderizado de celulares */
 celulares.forEach(item => {
   let article = document.createElement("article");
