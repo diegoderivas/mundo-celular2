@@ -18,5 +18,6 @@ const cel3 = new Celular(3, "Motorola", "Edge 30 Ultra", 950, "https://res.cloud
 const cel4 = new Celular(4, "Poco", "F4 GT", 450, "https://res.cloudinary.com/dsmpqr05e/image/upload/v1664456489/Mundo%20Celular/Celulares/4-poco-f4-gt_kabbzn.png");
 const cel5 = new Celular(5, "Samsung", "Galaxy S22 Ultra", 1000, "https://res.cloudinary.com/dsmpqr05e/image/upload/v1664456489/Mundo%20Celular/Celulares/5-samsung-galaxy-S22-ultra_cwcw4l.png");
 const cel6 = new Celular(6, "Xiaomi", "Mi 12", 700, "https://res.cloudinary.com/dsmpqr05e/image/upload/v1664456489/Mundo%20Celular/Celulares/6-xiaomi-mi-12_mn9fem.png");
+const cel7 = new Celular(7, "Apple", "Iphone 14 Plus", 899, "https://res.cloudinary.com/dsmpqr05e/image/upload/v1665320497/Mundo%20Celular/Celulares/7-apple-iphone-14-plus_sldfv8.png")
 
-celulares.push(cel1, cel2, cel3, cel4, cel5, cel6);
+celulares.push(cel1, cel2, cel3, cel4, cel5, cel6, cel7);

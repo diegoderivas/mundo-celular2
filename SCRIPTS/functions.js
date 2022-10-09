@@ -1,3 +1,24 @@
+/* Renderizar Productos */
+const renderizarProductos = (prods) => {
+  prods.forEach(item => {
+    let article = document.createElement("article");
+    article.innerHTML = `
+    <div class="card text-center m-3" style="width: 18rem;">
+      <img src="${item.imagen}" class="card-img-top imgCelular mt-3" alt="${item.marca} ${item.modelo}">
+      <div class="card-body">
+        <h5 class="card-title">${item.marca} ${item.modelo}</h5>
+        <h5>US$${item.precio}</h5>
+        <button type="button" id="${item.id}" class="btn btn-primary">Agregar al carrito</button>
+      </div>
+    </div>
+    `
+    productos.append(article);
+    let botonAgregarACarrito = document.getElementById(item.id);
+    botonAgregarACarrito.addEventListener("click", () => agregarACarrito(item));
+  })
+}
+
+
 /* Agregar al carrito */
 const agregarACarrito = producto => {
   let productoExiste = carritoStorage.find(item => item.id === producto.id);
@@ -102,6 +123,13 @@ const vaciarCarrito = () => {
       botonVaciarCarrito.style.display = "none";
     }
   })
+}
 
+
+/* Buscar Productos */
+const buscarProductos = (prod) => {
+  productos.innerHTML = "";
+  let buscado = celulares.filter(cel => (`${cel.marca} ${cel.modelo}`).toLowerCase().includes(prod));
+  renderizarProductos(buscado);
 }
 

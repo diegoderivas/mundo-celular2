@@ -29,23 +29,29 @@
   <!-- Cabecera del sitio -->
   <header class="d-flex justify-content-between">
     <a href="./index.html"><img class="m-3" src="https://res.cloudinary.com/dsmpqr05e/image/upload/v1664402400/Mundo%20Celular/Logo_Mundo_Celular_tkrdix.png" alt="logo"></a>
-
-    <!-- Botón Carrito -->
-    <button id="botonCarrito" type="button" class="btn btn-outline-primary position-relative align-self-center m-4" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
-      <i class="bi bi-cart carrito"></i>
-      <span id="numeroCarrito" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"></span>
-    </button>
-    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
-      <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasRightLabel">Carrito de Compras</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-      </div>
-      <div id="contenidoCarrito" class="offcanvas-body contenidoCarrito"></div>
-      <div class="d-flex align-self-center mb-3">
-        <button id="botonVaciarCarrito" type="button" class="btn btn-warning">Vaciar Carrito</button>
+    <!-- Buscador y carrito -->
+    <div class="d-flex align-items-center">
+      <!-- Buscador -->
+      <form class="d-flex" method="get" action="#">
+        <input id="formBuscador" class="form-control me-3" type="text" placeholder="Buscar productos...">
+        <button id="botonBuscador" type="button" class="btn btn-outline-primary"><i class="bi bi-search lupa"></i></button>
+      </form>
+      <!-- Botón Carrito -->
+      <button id="botonCarrito" type="button" class="btn btn-outline-primary position-relative align-self-center m-4" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+        <i class="bi bi-cart carrito"></i>
+        <span id="numeroCarrito" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"></span>
+      </button>
+      <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="offcanvasRightLabel">Carrito de Compras</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div id="contenidoCarrito" class="offcanvas-body contenidoCarrito"></div>
+        <div class="d-flex align-self-center mb-3">
+          <button id="botonVaciarCarrito" type="button" class="btn btn-warning">Vaciar Carrito</button>
+        </div>
       </div>
     </div>
-
   </header>
 
   <!-- Main -->
