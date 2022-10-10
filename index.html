@@ -55,7 +55,16 @@
   </header>
 
   <!-- Main -->
-  <main>
+  <main class="d-flex">
+    <!-- Menú lateral -->
+    <aside class="lateral ms-3">
+      <p class="fw-bold mt-3">Ordenar por:</p>
+      <select id="ordenador" class="form-select">
+        <option selected value="rec">Agregados recientemente</option>
+        <option value="mame">Precio: mayor a menor</option>
+        <option value="mema">Precio: menor a mayor</option>
+      </select>
+    </aside>
     <!-- Productos -->
     <section id="productos" class="d-flex flex-wrap"></section>
   </main>
@@ -81,6 +90,7 @@
   <!-- Bootstrap -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
   <!-- Scripts propios -->
+  <script src="./SCRIPTS/dom.js"></script>
   <script src="./SCRIPTS/functions.js"></script>
   <script src="./SCRIPTS/products.js"></script>
   <script src="./SCRIPTS/scripts.js"></script>

@@ -21,3 +21,14 @@ const cel6 = new Celular(6, "Xiaomi", "Mi 12", 700, "https://res.cloudinary.com/
 const cel7 = new Celular(7, "Apple", "Iphone 14 Plus", 899, "https://res.cloudinary.com/dsmpqr05e/image/upload/v1665320497/Mundo%20Celular/Celulares/7-apple-iphone-14-plus_sldfv8.png")
 
 celulares.push(cel1, cel2, cel3, cel4, cel5, cel6, cel7);
+switch (ordenador.value) {
+  case "rec":
+    celulares.sort((a, b) => b.id - a.id);
+    break;
+  case "mame":
+    celulares.sort((a, b) => b.precio - a.precio);
+    break;
+  case "mema":
+    celulares.sort((a, b) => a.precio - b.precio);
+    break;
+}

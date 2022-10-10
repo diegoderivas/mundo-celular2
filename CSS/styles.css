@@ -27,6 +27,12 @@ header{
   flex-direction: column;
 }
 
+/* Aside */
+.lateral{
+  width: 400px;
+}
+
+
 /* Footer */
 footer{
   background-color: #302f4e;
