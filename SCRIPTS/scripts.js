@@ -13,6 +13,7 @@ if (parseInt(numeroCarrito.innerHTML) === 0) {
 
 /* Renderizado de celulares */
 renderizarProductos(celulares);
+renderizarUltimosProductos(celulares);
 
 /* Evento vaciar carrito */
 botonVaciarCarrito.addEventListener("click", vaciarCarrito);
@@ -28,4 +29,4 @@ formBuscador.addEventListener("keypress", (e) => {
 });
 
 /* Ordenador */
-ordenador.addEventListener("change",() => ordenarProductos(celulares,ordenador.value));
+ordenador?.addEventListener("change",() => ordenarProductos(celulares,ordenador.value));

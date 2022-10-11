@@ -4,7 +4,7 @@ const renderizarProductos = (prods) => {
     let article = document.createElement("article");
     article.innerHTML = `
     <div class="card text-center m-3" style="width: 18rem;">
-      <img src="${item.imagen}" class="card-img-top imgCelular mt-3" alt="${item.marca} ${item.modelo}">
+      <img src="${item.imagen}" class="imgCelular mt-3 mx-auto" alt="${item.marca} ${item.modelo}">
       <div class="card-body">
         <h5 class="card-title">${item.marca} ${item.modelo}</h5>
         <h5>US$${item.precio}</h5>
@@ -12,9 +12,9 @@ const renderizarProductos = (prods) => {
       </div>
     </div>
     `
-    productos.append(article);
+    productos?.append(article);
     let botonAgregarACarrito = document.getElementById("btnAgregarCarrito" + item.id);
-    botonAgregarACarrito.addEventListener("click", () => agregarACarrito(item));
+    botonAgregarACarrito?.addEventListener("click", () => agregarACarrito(item));
   })
 }
 
@@ -146,9 +146,13 @@ const vaciarCarrito = () => {
 
 /* Buscar Productos */
 const buscarProductos = (prod) => {
-  productos.innerHTML = "";
+  if(window.location.pathname === "/index.html"){
+    window.location.href= "./PAGES/products.html";
+  }
   let buscado = celulares.filter(cel => (`${cel.marca} ${cel.modelo}`).toLowerCase().includes(prod));
+  productos.innerHTML= "";
   renderizarProductos(buscado);
+  console.log(buscado);
 }
 
 /* Ordenar Productos */
@@ -198,4 +202,28 @@ const quitarItemCarrito = (producto) => {
   carritoStorage.splice(indice,1);
   localStorage.setItem("carritoStorage",JSON.stringify(carritoStorage));
   renderizarCarrito();
+}
+
+/* Renderizar últimos productos */
+const renderizarUltimosProductos = (prods) =>{
+  let ultProds = [];
+  for (let i = prods.length - 1; i > prods.length - 4; i--){
+    ultProds.push(prods[i]);
+  }
+  ultProds.forEach(item => {
+    let article = document.createElement("article");
+    article.innerHTML = `
+    <div class="card text-center m-3" style="width: 18rem;">
+      <img src="${item.imagen}" class="card-img-top imgCelular mt-3" alt="${item.marca} ${item.modelo}">
+      <div class="card-body">
+        <h5 class="card-title">${item.marca} ${item.modelo}</h5>
+        <h5>US$${item.precio}</h5>
+        <button type="button" id="${"btnAgregarCarrito" + item.id}" class="btn btn-primary">Agregar al carrito</button>
+      </div>
+    </div>
+    `
+    ultimosProductos?.append(article);
+    let botonAgregarACarrito = document.getElementById("btnAgregarCarrito" + item.id);
+    botonAgregarACarrito?.addEventListener("click", () => agregarACarrito(item));
+  })
 }
