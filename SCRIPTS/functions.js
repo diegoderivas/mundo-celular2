@@ -145,15 +145,18 @@ const vaciarCarrito = () => {
 }
 
 /* Buscar Productos */
-const buscarProductos = (prod) => {
+const buscarProductos = prod => {
+  console.log("inicio1");
+  console.log("inicio2");
   if(window.location.pathname === "/index.html"){
     window.location.href= "./PAGES/products.html";
   }
   let buscado = celulares.filter(cel => (`${cel.marca} ${cel.modelo}`).toLowerCase().includes(prod));
   productos.innerHTML= "";
   renderizarProductos(buscado);
-  console.log(buscado);
+  console.log("fin");
 }
+
 
 /* Ordenar Productos */
 const ordenarProductos = (prods, orden) => {

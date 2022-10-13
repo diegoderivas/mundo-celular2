@@ -55,18 +55,20 @@
   </header>
 
   <!-- Main -->
-  <main class="d-flex">
+  <main class="d-flex container-fluid">
+    <div class="row">
     <!-- Menú lateral -->
-    <aside class="lateral ms-3">
-      <p class="fw-bold mt-3">Ordenar por:</p>
-      <select id="ordenador" class="form-select">
-        <option selected value="rec">Agregados recientemente</option>
-        <option value="mame">Precio: mayor a menor</option>
-        <option value="mema">Precio: menor a mayor</option>
-      </select>
-    </aside>
-    <!-- Productos -->
-    <section id="productos" class="d-flex flex-wrap"></section>
+      <aside class="col-lg-3 col-xxl-3">
+        <p class="fw-bold mt-3">Ordenar por:</p>
+        <select id="ordenador" class="form-select">
+          <option selected value="rec">Agregados recientemente</option>
+          <option value="mame">Precio: mayor a menor</option>
+          <option value="mema">Precio: menor a mayor</option>
+        </select>
+      </aside>
+      <!-- Productos -->
+      <section id="productos" class="col-lg d-flex flex-wrap justify-content-center"></section>
+    </div>
   </main>
 
   <!-- Footer -->
