@@ -36,7 +36,6 @@ const renderizarProductos = async () =>{
 }
 
 
-
 /* Agregar al carrito */
 const agregarACarrito = producto => {
   let productoExiste = carritoStorage.find(item => item.id === producto.id);
@@ -71,6 +70,7 @@ const agregarACarrito = producto => {
     onClick: function () { }
   }).showToast();
 }
+
 
 /* Renderizar Carrito */
 const renderizarCarrito = () => {
@@ -124,6 +124,7 @@ const renderizarCarrito = () => {
   }
 }
 
+
 /* Vaciar carrito */
 const vaciarCarrito = () => {
   Swal.fire({
@@ -163,35 +164,48 @@ const vaciarCarrito = () => {
 }
 
 /* Buscar Productos */
-const buscarProductos = prod => {
-  console.log("inicio1");
-  console.log("inicio2---");
-  if(window.location.pathname === "/index.html"){
-    window.location.href= "./PAGES/products.html";
-  }
-  productos = document.getElementById("productos");
+const buscarProductos = async prod => {
+  let result = await fetch ("../data/products.json");
+  let data = await result.json();
   productos.innerHTML= "";
-  let buscado = celulares.filter(cel => (`${cel.marca} ${cel.modelo}`).toLowerCase().includes(prod));
-  renderizarProductos(buscado);
-  console.log("fin");
+  let buscado = data.filter(cel => (`${cel.marca} ${cel.modelo}`).toLowerCase().includes(prod));
+  buscado.forEach(item => {
+    let article = document.createElement("article");
+    article.classList="mx-auto"
+    article.innerHTML = `
+    <div class="tarjetaCelular card text-center my-3 mx-auto">
+      <img src="${item.imagen}" class="imgCelular mt-3 mx-auto" alt="${item.marca} ${item.modelo}">
+      <div class="card-body">
+        <h5 class="card-title">${item.marca} ${item.modelo}</h5>
+        <h5>US$${item.precio}</h5>
+        <button type="button" id="${"btnAgregarCarrito" + item.id}" class="btn btn-primary">Agregar al carrito</button>
+      </div>
+    </div>
+    `
+    productos?.append(article);
+    let botonAgregarACarrito = document.getElementById("btnAgregarCarrito" + item.id);
+    botonAgregarACarrito?.addEventListener("click", () => agregarACarrito(item));
+  })
 }
 
 
 /* Ordenar Productos */
-const ordenarProductos = (prods, orden) => {
+const ordenarProductos = async orden => {
+  let result = await fetch ("../data/products.json");
+  let data = await result.json();
   switch (orden) {
     case "rec":
-      prods.sort((a, b) => b.id - a.id);
+      data.sort((a, b) => b.id - a.id);
       break;
     case "mame":
-      prods.sort((a, b) => b.precio - a.precio);
+      data.sort((a, b) => b.precio - a.precio);
       break;
     case "mema":
-      prods.sort((a, b) => a.precio - b.precio);
+      data.sort((a, b) => a.precio - b.precio);
       break;
   }
   productos.innerHTML = "";
-  renderizarProductos(prods);
+  renderizarProductos();
 }
 
 /* Sumar Item Carrito*/

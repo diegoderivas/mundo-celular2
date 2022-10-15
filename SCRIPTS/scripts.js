@@ -20,11 +20,11 @@ renderizarUltimosProductos();
 botonVaciarCarrito.addEventListener("click", vaciarCarrito);
 
 /* Buscador */
-if(window.location.pathname === "products.html"){
+if(window.location.pathname === "/pages/products.html"){
   botonBuscador.addEventListener("click", () => buscarProductos(formBuscador.value.toLowerCase()));
 }
 
-if(window.location.pathname === "products.html"){
+if(window.location.pathname === "/pages/products.html"){
   formBuscador.addEventListener("keypress", (e) => {
     if (e.code === "Enter") {
       e.preventDefault();
@@ -34,4 +34,4 @@ if(window.location.pathname === "products.html"){
 }
 
 /* Ordenador */
-ordenador?.addEventListener("change",() => ordenarProductos(celulares,ordenador.value));
+ordenador?.addEventListener("change",() => ordenarProductos(ordenador.value));
