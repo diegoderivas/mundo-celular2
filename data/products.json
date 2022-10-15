@@ -1,0 +1,107 @@
+[
+  {
+    "id": 1,
+    "marca": "Huawei",
+    "modelo": "Mate 30 Pro",
+    "precio": 799,
+    "imagen": "https://res.cloudinary.com/dsmpqr05e/image/upload/v1664456489/Mundo%20Celular/Celulares/1-huawei-mate-30-pro_bvplun.png"
+  },
+  {
+    "id": 2,
+    "marca": "Apple",
+    "modelo": "Iphone 13 Pro Max",
+    "precio": 1200,
+    "imagen": "https://res.cloudinary.com/dsmpqr05e/image/upload/v1664456489/Mundo%20Celular/Celulares/2-iphone-13-pro-max_j1fcvp.png"
+  },
+  {
+    "id": 3,
+    "marca": "Motorola",
+    "modelo": "Edge 30 Ultra",
+    "precio": 950,
+    "imagen": "https://res.cloudinary.com/dsmpqr05e/image/upload/v1664456489/Mundo%20Celular/Celulares/3-motorola-edge-30_ultra_mfucop.png"
+  },
+  {
+    "id": 4,
+    "marca": "Poco",
+    "modelo": "F4 GT",
+    "precio": 450,
+    "imagen": "https://res.cloudinary.com/dsmpqr05e/image/upload/v1664456489/Mundo%20Celular/Celulares/4-poco-f4-gt_kabbzn.png"
+  },
+  {
+    "id": 5,
+    "marca": "Samsung",
+    "modelo": "Galaxy S22 Ultra",
+    "precio": 1000,
+    "imagen": "https://res.cloudinary.com/dsmpqr05e/image/upload/v1664456489/Mundo%20Celular/Celulares/5-samsung-galaxy-S22-ultra_cwcw4l.png"
+  },
+  {
+    "id": 6,
+    "marca": "Xiaomi",
+    "modelo": "Mi 12",
+    "precio": 700,
+    "imagen": "https://res.cloudinary.com/dsmpqr05e/image/upload/v1664456489/Mundo%20Celular/Celulares/6-xiaomi-mi-12_mn9fem.png"
+  },
+  {
+    "id": 7,
+    "marca": "Apple",
+    "modelo": "Iphone 14 Plus",
+    "precio": 899,
+    "imagen": "https://res.cloudinary.com/dsmpqr05e/image/upload/v1665320497/Mundo%20Celular/Celulares/7-apple-iphone-14-plus_sldfv8.png"
+  },
+  {
+    "id": 8,
+    "marca": "Samsung",
+    "modelo": "S21 FE",
+    "precio": 400,
+    "imagen": "https://res.cloudinary.com/dsmpqr05e/image/upload/v1665524266/Mundo%20Celular/Celulares/8-samsung-s21-fe-removebg-preview_hzetpg.png"
+  },
+  {
+    "id": 9,
+    "marca": "Samsung",
+    "modelo": "Z Fold 3",
+    "precio": 1100,
+    "imagen": "https://res.cloudinary.com/dsmpqr05e/image/upload/v1665524266/Mundo%20Celular/Celulares/9-samsung-z-fold-3-removebg-preview_m7gf2j.png"
+  },
+  {
+    "id": 10,
+    "marca": "Poco",
+    "modelo": "X4 Pro",
+    "precio": 300,
+    "imagen": "https://res.cloudinary.com/dsmpqr05e/image/upload/v1665524266/Mundo%20Celular/Celulares/10-poco-x4-pro-removebg-preview_d6ootw.png"
+  },
+  {
+    "id": 11,
+    "marca": "Poco",
+    "modelo": "M5S",
+    "precio": 250,
+    "imagen": "https://res.cloudinary.com/dsmpqr05e/image/upload/v1665524266/Mundo%20Celular/Celulares/11-poco-m5s_wuyztq.png"
+  },
+  {
+    "id": 12,
+    "marca": "Xiaomi",
+    "modelo": "12S Ultra",
+    "precio": 850,
+    "imagen": "https://res.cloudinary.com/dsmpqr05e/image/upload/v1665524973/Mundo%20Celular/Celulares/12-xiaomi-12s-ultra-removebg-preview_bl4hff.png"
+  },
+  {
+    "id": 13,
+    "marca": "Xiaomi",
+    "modelo": "12T Pro",
+    "precio": 750,
+    "imagen": "https://res.cloudinary.com/dsmpqr05e/image/upload/v1665524267/Mundo%20Celular/Celulares/13-xiaomi-12t-pro-removebg-preview_z0yne0.png"
+  },
+  {
+    "id": 14,
+    "marca": "Apple",
+    "modelo": "Iphone 14 Pro Max",
+    "precio": 1350,
+    "imagen": "https://res.cloudinary.com/dsmpqr05e/image/upload/v1665524269/Mundo%20Celular/Celulares/14-iphone-14-pro-max_e6phlm.png"
+  },
+  {
+    "id": 15,
+    "marca": "Huawei",
+    "modelo": "P50 Pro",
+    "precio": 700,
+    "imagen": "https://res.cloudinary.com/dsmpqr05e/image/upload/v1665524268/Mundo%20Celular/Celulares/15-huawei-p50-pro-removebg-preview_gf8auw.png"
+  }
+]

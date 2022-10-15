@@ -18,17 +18,18 @@ header{
 }
 
 /* Carrito y lupa */
-.carrito, .lupa{
+.carrito{
   font-size: 1.5rem;
+}
+
+.lupa{
+  font-size: 1rem;
 }
 
 .contenidoCarrito{
   display: flex;
   flex-direction: column;
 }
-
-
-
 
 /* Footer */
 footer{
@@ -48,6 +49,50 @@ footer{
 }
 
 /* Celulares */
+.tarjetaCelular{
+  width: 18vw;
+}
+
 .imgCelular{
-  width: 250px;
+  width: 15vw;
+}
+
+
+
+/* Mediaqueries para monitores menores a xxl*/
+@media screen and (min-width: 993px) and (max-width: 1399px){
+  /* Celulares */
+  .tarjetaCelular{
+    width: 20vw;
+  }
+
+  .imgCelular{
+    width: 17vw;
+  }
+}
+
+
+/* Mediaquieries para tablets */
+@media screen and (min-width: 576px) and (max-width: 992px){
+  /* Celulares */
+  .tarjetaCelular{
+    width: 47vw;
+  }
+
+  .imgCelular{
+    width: 40vw;
+  }
+}
+
+
+/* Mediaqueries para celulares */
+@media screen and (min-width: 320px) and (max-width: 575px){
+  /* Celulares */
+  .tarjetaCelular{
+    width: 95vw;
+  }
+
+  .imgCelular{
+    width: 70vw;
+  }
 }

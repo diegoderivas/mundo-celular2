@@ -31,11 +31,6 @@
     <a href="../index.html"><img class="m-3" src="https://res.cloudinary.com/dsmpqr05e/image/upload/v1664402400/Mundo%20Celular/Logo_Mundo_Celular_tkrdix.png" alt="logo"></a>
     <!-- Buscador y carrito -->
     <div class="d-flex align-items-center">
-      <!-- Buscador -->
-      <form class="d-flex" method="get" action="#">
-        <input id="formBuscador" class="form-control me-3" type="text" placeholder="Buscar productos...">
-        <button id="botonBuscador" type="button" class="btn btn-outline-primary"><i class="bi bi-search lupa"></i></button>
-      </form>
       <!-- Botón Carrito -->
       <button id="botonCarrito" type="button" class="btn btn-outline-primary position-relative align-self-center m-4" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
         <i class="bi bi-cart carrito"></i>
@@ -55,10 +50,15 @@
   </header>
 
   <!-- Main -->
-  <main class="d-flex container-fluid">
+  <main class="container-fluid">
     <div class="row">
     <!-- Menú lateral -->
-      <aside class="col-lg-3 col-xxl-3">
+      <aside class="col-lg-3 col-xxl-2">
+        <!-- Buscador -->
+        <form class="d-flex mt-3" method="get" action="#">
+          <input id="formBuscador" class="form-control me-3" type="text" placeholder="Buscar productos...">
+          <button id="botonBuscador" type="button" class="btn btn-outline-primary"><i class="bi bi-search lupa"></i></button>
+        </form>
         <p class="fw-bold mt-3">Ordenar por:</p>
         <select id="ordenador" class="form-select">
           <option selected value="rec">Agregados recientemente</option>
@@ -67,7 +67,7 @@
         </select>
       </aside>
       <!-- Productos -->
-      <section id="productos" class="col-lg d-flex flex-wrap justify-content-center"></section>
+      <section id="productos" class="p-0 mx-auto row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xxl-4 col-lg"></section>
     </div>
   </main>
 

@@ -2,8 +2,9 @@
 const renderizarProductos = (prods) => {
   prods.forEach(item => {
     let article = document.createElement("article");
+    article.classList="mx-auto"
     article.innerHTML = `
-    <div class="card text-center m-3" style="width: 18rem;">
+    <div class="tarjetaCelular card text-center my-3 mx-auto">
       <img src="${item.imagen}" class="imgCelular mt-3 mx-auto" alt="${item.marca} ${item.modelo}">
       <div class="card-body">
         <h5 class="card-title">${item.marca} ${item.modelo}</h5>
@@ -147,12 +148,13 @@ const vaciarCarrito = () => {
 /* Buscar Productos */
 const buscarProductos = prod => {
   console.log("inicio1");
-  console.log("inicio2");
+  console.log("inicio2---");
   if(window.location.pathname === "/index.html"){
     window.location.href= "./PAGES/products.html";
   }
-  let buscado = celulares.filter(cel => (`${cel.marca} ${cel.modelo}`).toLowerCase().includes(prod));
+  productos = document.getElementById("productos");
   productos.innerHTML= "";
+  let buscado = celulares.filter(cel => (`${cel.marca} ${cel.modelo}`).toLowerCase().includes(prod));
   renderizarProductos(buscado);
   console.log("fin");
 }
@@ -208,7 +210,7 @@ const quitarItemCarrito = (producto) => {
 }
 
 /* Renderizar últimos productos */
-const renderizarUltimosProductos = (prods) =>{
+/* const renderizarUltimosProductos =(prods) =>{
   let ultProds = [];
   for (let i = prods.length - 1; i > prods.length - 4; i--){
     ultProds.push(prods[i]);
@@ -229,4 +231,8 @@ const renderizarUltimosProductos = (prods) =>{
     let botonAgregarACarrito = document.getElementById("btnAgregarCarrito" + item.id);
     botonAgregarACarrito?.addEventListener("click", () => agregarACarrito(item));
   })
+} */
+
+const renderizarUltimosProductos = async () => {
+  let ultProds = [];
 }

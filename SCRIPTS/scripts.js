@@ -1,3 +1,5 @@
+/* Acceso a datos */
+
 /* Acceso al localStorage */
 let numeroCarritoStorage = JSON.parse(localStorage.getItem("numeroCarritoStorage"));
 let carritoStorage = JSON.parse(localStorage.getItem("carritoStorage")) || [];
