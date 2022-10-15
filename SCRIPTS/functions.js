@@ -1,6 +1,22 @@
-/* Renderizar Productos */
-const renderizarProductos = (prods) => {
-  prods.forEach(item => {
+/* Renderizado de celulares */
+const renderizarProductos = async () =>{
+  let results = await fetch("../data/products.json");
+  let data = await results.json();
+
+  /* Ordenamiento de celulares */
+  switch (ordenador?.value) {
+    case "rec":
+      data.sort((a, b) => b.id - a.id);
+      break;
+    case "mame":
+      data.sort((a, b) => b.precio - a.precio);
+      break;
+    case "mema":
+      data.sort((a, b) => a.precio - b.precio);
+      break;
+  }
+
+  data.forEach(item => {
     let article = document.createElement("article");
     article.classList="mx-auto"
     article.innerHTML = `
@@ -18,6 +34,7 @@ const renderizarProductos = (prods) => {
     botonAgregarACarrito?.addEventListener("click", () => agregarACarrito(item));
   })
 }
+
 
 
 /* Agregar al carrito */
@@ -209,17 +226,19 @@ const quitarItemCarrito = (producto) => {
   renderizarCarrito();
 }
 
-/* Renderizar últimos productos */
-/* const renderizarUltimosProductos =(prods) =>{
+const renderizarUltimosProductos = async () =>{
+  let results = await fetch("../data/products.json");
+  let data = await results.json();
   let ultProds = [];
-  for (let i = prods.length - 1; i > prods.length - 4; i--){
-    ultProds.push(prods[i]);
+  for (let i = data.length - 1; i > data.length - 4; i--){
+    ultProds.push(data[i]);
   }
   ultProds.forEach(item => {
     let article = document.createElement("article");
+    article.classList="mx-3"
     article.innerHTML = `
-    <div class="card text-center m-3" style="width: 18rem;">
-      <img src="${item.imagen}" class="card-img-top imgCelular mt-3" alt="${item.marca} ${item.modelo}">
+    <div class="tarjetaCelular card text-center my-3 mx-auto">
+      <img src="${item.imagen}" class="imgCelular mt-3 mx-auto" alt="${item.marca} ${item.modelo}">
       <div class="card-body">
         <h5 class="card-title">${item.marca} ${item.modelo}</h5>
         <h5>US$${item.precio}</h5>
@@ -231,8 +250,5 @@ const quitarItemCarrito = (producto) => {
     let botonAgregarACarrito = document.getElementById("btnAgregarCarrito" + item.id);
     botonAgregarACarrito?.addEventListener("click", () => agregarACarrito(item));
   })
-} */
-
-const renderizarUltimosProductos = async () => {
-  let ultProds = [];
 }
+
