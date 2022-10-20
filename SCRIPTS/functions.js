@@ -1,43 +1,48 @@
 /* Renderizado de celulares */
 const renderizarProductos = async () =>{
-  let results = await fetch("../data/products.json");
-  let data = await results.json();
-
-  /* Ordenamiento de celulares */
-  switch (ordenador?.value) {
-    case "rec":
-      data.sort((a, b) => b.id - a.id);
-      break;
-    case "mame":
-      data.sort((a, b) => b.precio - a.precio);
-      break;
-    case "mema":
-      data.sort((a, b) => a.precio - b.precio);
-      break;
-  }
-
-  data.forEach(item => {
-    let article = document.createElement("article");
-    article.classList="mx-auto"
-    article.innerHTML = `
-    <div class="tarjetaCelular card text-center my-3 mx-auto">
-      <img src="${item.imagen}" class="imgCelular mt-3 mx-auto" alt="${item.marca} ${item.modelo}">
-      <div class="card-body">
-        <h5 class="card-title">${item.marca} ${item.modelo}</h5>
-        <h5>US$${item.precio}</h5>
-        <button type="button" id="${"btnAgregarCarrito" + item.id}" class="btn btn-primary">Agregar al carrito</button>
+  try {
+    let results = await fetch("../data/products.json");
+    let data = await results.json();
+  
+    /* Ordenamiento de celulares */
+    switch (ordenador?.value) {
+      case "rec":
+        data.sort((a, b) => b.id - a.id);
+        break;
+      case "mame":
+        data.sort((a, b) => b.precio - a.precio);
+        break;
+      case "mema":
+        data.sort((a, b) => a.precio - b.precio);
+        break;
+    }
+  
+    data.forEach(item => {
+      let article = document.createElement("article");
+      article.classList="mx-auto"
+      article.innerHTML = `
+      <div class="tarjetaCelular card text-center my-3 mx-auto">
+        <img src="${item.imagen}" class="imgCelular mt-3 mx-auto" alt="${item.marca} ${item.modelo}">
+        <div class="card-body">
+          <h5 class="card-title">${item.marca} ${item.modelo}</h5>
+          <h5>US$${item.precio}</h5>
+          <button type="button" id="${"btnAgregarCarrito" + item.id}" class="btn btn-primary">Agregar al carrito</button>
+        </div>
       </div>
-    </div>
-    `
-    productos?.append(article);
-    let botonAgregarACarrito = document.getElementById("btnAgregarCarrito" + item.id);
-    botonAgregarACarrito?.addEventListener("click", () => agregarACarrito(item));
-  })
+      `
+      productos?.append(article);
+      let botonAgregarACarrito = document.getElementById("btnAgregarCarrito" + item.id);
+      botonAgregarACarrito?.addEventListener("click", () => agregarACarrito(item));
+    })
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 
 /* Agregar al carrito */
 const agregarACarrito = producto => {
+  console.log(producto);
   let productoExiste = carritoStorage.find(item => item.id === producto.id);
   if (!productoExiste) {
     carritoStorage.push({
@@ -165,47 +170,55 @@ const vaciarCarrito = () => {
 
 /* Buscar Productos */
 const buscarProductos = async prod => {
-  let result = await fetch ("../data/products.json");
-  let data = await result.json();
-  productos.innerHTML= "";
-  let buscado = data.filter(cel => (`${cel.marca} ${cel.modelo}`).toLowerCase().includes(prod));
-  buscado.forEach(item => {
-    let article = document.createElement("article");
-    article.classList="mx-auto"
-    article.innerHTML = `
-    <div class="tarjetaCelular card text-center my-3 mx-auto">
-      <img src="${item.imagen}" class="imgCelular mt-3 mx-auto" alt="${item.marca} ${item.modelo}">
-      <div class="card-body">
-        <h5 class="card-title">${item.marca} ${item.modelo}</h5>
-        <h5>US$${item.precio}</h5>
-        <button type="button" id="${"btnAgregarCarrito" + item.id}" class="btn btn-primary">Agregar al carrito</button>
+  try {
+    let result = await fetch ("../data/products.json");
+    let data = await result.json();
+    productos.innerHTML= "";
+    let buscado = data.filter(cel => (`${cel.marca} ${cel.modelo}`).toLowerCase().includes(prod));
+    buscado.forEach(item => {
+      let article = document.createElement("article");
+      article.classList="mx-auto"
+      article.innerHTML = `
+      <div class="tarjetaCelular card text-center my-3 mx-auto">
+        <img src="${item.imagen}" class="imgCelular mt-3 mx-auto" alt="${item.marca} ${item.modelo}">
+        <div class="card-body">
+          <h5 class="card-title">${item.marca} ${item.modelo}</h5>
+          <h5>US$${item.precio}</h5>
+          <button type="button" id="${"btnAgregarCarrito" + item.id}" class="btn btn-primary">Agregar al carrito</button>
+        </div>
       </div>
-    </div>
-    `
-    productos?.append(article);
-    let botonAgregarACarrito = document.getElementById("btnAgregarCarrito" + item.id);
-    botonAgregarACarrito?.addEventListener("click", () => agregarACarrito(item));
-  })
+      `
+      productos?.append(article);
+      let botonAgregarACarrito = document.getElementById("btnAgregarCarrito" + item.id);
+      botonAgregarACarrito.addEventListener("click", () => agregarACarrito(item));
+    })
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 
 /* Ordenar Productos */
 const ordenarProductos = async orden => {
-  let result = await fetch ("../data/products.json");
-  let data = await result.json();
-  switch (orden) {
-    case "rec":
-      data.sort((a, b) => b.id - a.id);
-      break;
-    case "mame":
-      data.sort((a, b) => b.precio - a.precio);
-      break;
-    case "mema":
-      data.sort((a, b) => a.precio - b.precio);
-      break;
+  try {
+    let result = await fetch ("../data/products.json");
+    let data = await result.json();
+    switch (orden) {
+      case "rec":
+        data.sort((a, b) => b.id - a.id);
+        break;
+      case "mame":
+        data.sort((a, b) => b.precio - a.precio);
+        break;
+      case "mema":
+        data.sort((a, b) => a.precio - b.precio);
+        break;
+    }
+    productos.innerHTML = "";
+    renderizarProductos();
+  } catch (error) {
+    console.log(error);
   }
-  productos.innerHTML = "";
-  renderizarProductos();
 }
 
 /* Sumar Item Carrito*/
@@ -240,29 +253,33 @@ const quitarItemCarrito = (producto) => {
   renderizarCarrito();
 }
 
+/* Renderizar últimos productos (solo para index.html) */
 const renderizarUltimosProductos = async () =>{
-  let results = await fetch("../data/products.json");
-  let data = await results.json();
-  let ultProds = [];
-  for (let i = data.length - 1; i > data.length - 4; i--){
-    ultProds.push(data[i]);
-  }
-  ultProds.forEach(item => {
-    let article = document.createElement("article");
-    article.classList="mx-3"
-    article.innerHTML = `
-    <div class="tarjetaCelular card text-center my-3 mx-auto">
-      <img src="${item.imagen}" class="imgCelular mt-3 mx-auto" alt="${item.marca} ${item.modelo}">
-      <div class="card-body">
-        <h5 class="card-title">${item.marca} ${item.modelo}</h5>
-        <h5>US$${item.precio}</h5>
-        <button type="button" id="${"btnAgregarCarrito" + item.id}" class="btn btn-primary">Agregar al carrito</button>
+  try {
+    let results = await fetch("../data/products.json");
+    let data = await results.json();
+    let ultProds = [];
+    for (let i = data.length - 1; i > data.length - 4; i--){
+      ultProds.push(data[i]);
+    }
+    ultProds.forEach(item => {
+      let article = document.createElement("article");
+      article.classList="mx-3"
+      article.innerHTML = `
+      <div class="tarjetaCelular card text-center my-3 mx-auto">
+        <img src="${item.imagen}" class="imgCelular mt-3 mx-auto" alt="${item.marca} ${item.modelo}">
+        <div class="card-body">
+          <h5 class="card-title">${item.marca} ${item.modelo}</h5>
+          <h5>US$${item.precio}</h5>
+          <button type="button" id="${"btnAgregarCarrito" + item.id}" class="btn btn-primary">Agregar al carrito</button>
+        </div>
       </div>
-    </div>
-    `
-    ultimosProductos?.append(article);
-    let botonAgregarACarrito = document.getElementById("btnAgregarCarrito" + item.id);
-    botonAgregarACarrito?.addEventListener("click", () => agregarACarrito(item));
-  })
+      `
+      ultimosProductos?.append(article);
+      let botonAgregarACarritoDos = document.getElementById("btnAgregarCarrito" + item.id);
+      botonAgregarACarritoDos?.addEventListener("click", () => agregarACarrito(item));
+    })
+  } catch (error) {
+    console.log(error);
+  }
 }
-

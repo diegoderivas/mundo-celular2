@@ -11,11 +11,6 @@ if (parseInt(numeroCarrito.innerHTML) === 0) {
   botonVaciarCarrito.style.display = "none";
 }
 
-
-/* Renderizado de celulares */
-renderizarProductos();
-renderizarUltimosProductos();
-
 /* Evento vaciar carrito */
 botonVaciarCarrito.addEventListener("click", vaciarCarrito);
 
