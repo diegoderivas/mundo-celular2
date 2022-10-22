@@ -8,3 +8,4 @@ const formBuscador = document.getElementById("formBuscador");
 const botonBuscador = document.getElementById("botonBuscador");
 const ordenador = document.getElementById("ordenador");
 const ultimosProductos = document.getElementById("ultimosProductos");
+const filtroMarca = document.getElementById("filtroMarca");

@@ -15,18 +15,14 @@ if (parseInt(numeroCarrito.innerHTML) === 0) {
 botonVaciarCarrito.addEventListener("click", vaciarCarrito);
 
 /* Buscador */
-if(window.location.pathname === "/pages/products.html"){
-  botonBuscador.addEventListener("click", () => buscarProductos(formBuscador.value.toLowerCase()));
-}
+botonBuscador?.addEventListener("click", () => buscarProductos(formBuscador.value.toLowerCase()));
 
-if(window.location.pathname === "/pages/products.html"){
-  formBuscador.addEventListener("keypress", (e) => {
-    if (e.code === "Enter") {
-      e.preventDefault();
-      buscarProductos(formBuscador.value.toLowerCase());
-    }
-  });
-}
+formBuscador?.addEventListener("keypress", (e) => {
+  if (e.code === "Enter") {
+    e.preventDefault();
+    buscarProductos(formBuscador.value.toLowerCase());
+  }
+});
 
 /* Ordenador */
 ordenador?.addEventListener("change",() => ordenarProductos(ordenador.value));
