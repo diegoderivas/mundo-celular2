@@ -291,13 +291,13 @@ const renderizarFiltroPorMarca = async () => {
 
   data.forEach(item => {
     let marcaExiste = marcas.find(marca => marca === item.marca);
-    if (!marcaExiste){
+    if (!marcaExiste) {
       marcas.push(item.marca);
       let div = document.createElement("div");
       div.className = "form-check"
 
       let input = document.createElement("input");
-      input.className = "form-check-input";
+      input.className = "form-check-input checkboxMarca";
       input.value = "";
       input.type = "checkbox"
       input.name = item.marca;
@@ -308,22 +308,56 @@ const renderizarFiltroPorMarca = async () => {
       label.setAttribute("for", `marca${item.marca}`);
       label.innerHTML = `${item.marca}`;
 
-      div.append(input,label);
+      div.append(input, label);
       filtroMarca.append(div);
 
       let botonFiltroMarca = document.getElementById(`marca${item.marca}`);
-      botonFiltroMarca.addEventListener("change", () => filtrarCelularesMarca(botonFiltroMarca,botonFiltroMarca.name));
+      botonFiltroMarca.addEventListener("change", () => filtrarCelularesMarca(botonFiltroMarca, botonFiltroMarca.name));
     }
   })
 }
 
 /* Filtrado de celulares por marca */
-const filtrarCelularesMarca = async (checkeo, marca) => {
-  let response = await fetch("https://raw.githubusercontent.com/diegoderivas/mundo-celular/main/data/products.json");
-  let data = await response.json();
-  if (checkeo.checked){
-    console.log(`Se tildo ${marca}`);
-  } else {
-    console.log(`Se destildo ${marca}`)
+const filtrarCelularesMarca = async () => {
+  try {
+    let response = await fetch("https://raw.githubusercontent.com/diegoderivas/mundo-celular/main/data/products.json");
+    let data = await response.json();
+    productos.innerHTML = "";
+  
+    let checkboxMarca = document.getElementsByClassName("checkboxMarca");
+    let marcasFiltradas = [];
+  
+    for (let elemento of checkboxMarca) {
+      if (elemento.checked) {
+        marcasFiltradas.push(elemento.name);
+      }
+    }
+  
+    if (marcasFiltradas.length === 0){
+      renderizarProductos();
+    }
+  
+    marcasFiltradas.forEach(marcaFiltrada => {
+      data.forEach(marcaData => {
+        if (marcaFiltrada === marcaData.marca){
+          let article = document.createElement("article");
+          article.classList = "mx-auto";
+          article.innerHTML = `
+          <div class="tarjetaCelular card text-center my-3 mx-auto">
+          <img src="${marcaData.imagen}" class="imgCelular mt-3 mx-auto" alt="${marcaData.marca} ${marcaData.modelo}">
+          <div class="card-body">
+            <h5 class="card-title">${marcaData.marca} ${marcaData.modelo}</h5>
+            <h5>US$${marcaData.precio}</h5>
+            <button type="button" id="${"btnAgregarCarrito" + marcaData.id}" class="btn btn-primary">Agregar al carrito</button>
+          </div>
+        </div>
+          `
+        productos?.append(article);
+        }
+      })
+    })
+    
+  } catch (error) {
+    console.log(error);
   }
 }
