@@ -4,26 +4,49 @@ const renderizarProductos = async () => {
     let results = await fetch("https://raw.githubusercontent.com/diegoderivas/mundo-celular/main/data/products.json");
     let data = await results.json();
 
-    /* Ordenamiento de celulares */
-    ordenarProductosDos(data);
-
-    data.forEach(item => {
-      let article = document.createElement("article");
-      article.classList = "mx-auto"
-      article.innerHTML = `
-      <div class="tarjetaCelular card text-center my-3 mx-auto">
-        <img src="${item.imagen}" class="imgCelular mt-3 mx-auto" alt="${item.marca} ${item.modelo}">
-        <div class="card-body">
-          <h5 class="card-title">${item.marca} ${item.modelo}</h5>
-          <h5>US$${item.precio}</h5>
-          <button type="button" id="${"btnAgregarCarrito" + item.id}" class="btn btn-primary">Agregar al carrito</button>
+    /* Buscador de productos */
+    let dataBuscada = buscarProductos(data);
+    
+    /* Filtrado de productos por marca*/
+    let marcas = filtrarCelularesMarca();
+    let dataFiltrada = [];
+    if (marcas.length > 0){
+      marcas.forEach(marcaAFiltrar => {
+        dataBuscada.forEach(cel => {
+          if (cel.marca === marcaAFiltrar){
+            dataFiltrada.push(cel);
+          }
+        })
+      })
+    } else {
+      dataFiltrada = dataBuscada;
+    }
+    
+    ordenarProductos(dataFiltrada);
+    if (dataFiltrada.length == 0){
+      productos.className = "col-lg text-center mt-3";
+      productos.innerHTML = "<h2>No se han encontrado productos</h2>"
+    } else {
+      productos.innerHTML = "";
+      productos.className = "p-0 mx-auto row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xxl-4 col-lg"
+      dataFiltrada.forEach(item => {
+        let article = document.createElement("article");
+        article.classList = "mx-auto"
+        article.innerHTML = `
+        <div class="tarjetaCelular card text-center my-3 mx-auto">
+          <img src="${item.imagen}" class="imgCelular mt-3 mx-auto" alt="${item.marca} ${item.modelo}">
+          <div class="card-body">
+            <h5 class="card-title">${item.marca} ${item.modelo}</h5>
+            <h5>US$${item.precio}</h5>
+            <button type="button" id="${"btnAgregarCarrito" + item.id}" class="btn btn-primary">Agregar al carrito</button>
+          </div>
         </div>
-      </div>
-      `
-      productos?.append(article);
-      let botonAgregarACarrito = document.getElementById("btnAgregarCarrito" + item.id);
-      botonAgregarACarrito?.addEventListener("click", () => agregarACarrito(item));
-    })
+        `
+        productos?.append(article);
+        let botonAgregarACarrito = document.getElementById("btnAgregarCarrito" + item.id);
+        botonAgregarACarrito?.addEventListener("click", () => agregarACarrito(item));
+      })
+    }
   } catch (error) {
     console.log(error);
   }
@@ -157,60 +180,17 @@ const vaciarCarrito = () => {
   })
 }
 
-/* Buscar Productos */
-const buscarProductos = async prod => {
-  try {
-    let result = await fetch("https://raw.githubusercontent.com/diegoderivas/mundo-celular/main/data/products.json");
-    let data = await result.json();
-    productos.innerHTML = "";
-    let buscado = data.filter(cel => (`${cel.marca} ${cel.modelo}`).toLowerCase().includes(prod));
-    buscado.forEach(item => {
-      let article = document.createElement("article");
-      article.classList = "mx-auto"
-      article.innerHTML = `
-      <div class="tarjetaCelular card text-center my-3 mx-auto">
-        <img src="${item.imagen}" class="imgCelular mt-3 mx-auto" alt="${item.marca} ${item.modelo}">
-        <div class="card-body">
-          <h5 class="card-title">${item.marca} ${item.modelo}</h5>
-          <h5>US$${item.precio}</h5>
-          <button type="button" id="${"btnAgregarCarrito" + item.id}" class="btn btn-primary">Agregar al carrito</button>
-        </div>
-      </div>
-      `
-      productos?.append(article);
-      let botonAgregarACarrito = document.getElementById("btnAgregarCarrito" + item.id);
-      botonAgregarACarrito.addEventListener("click", () => agregarACarrito(item));
-    })
-  } catch (error) {
-    console.log(error);
-  }
+
+/* Buscador de productos*/
+const buscarProductos = lista => {
+  let prod = formBuscador.value.toLowerCase();
+  let buscado = lista.filter(elem => (`${elem.marca} ${elem.modelo}`).toLowerCase().includes(prod))
+  return buscado;
 }
 
 
-/* Ordenar Productos */
-const ordenarProductos = async orden => {
-  try {
-    let result = await fetch("https://raw.githubusercontent.com/diegoderivas/mundo-celular/main/data/products.json");
-    let data = await result.json();
-    switch (orden) {
-      case "rec":
-        data.sort((a, b) => b.id - a.id);
-        break;
-      case "mame":
-        data.sort((a, b) => b.precio - a.precio);
-        break;
-      case "mema":
-        data.sort((a, b) => a.precio - b.precio);
-        break;
-    }
-    productos.innerHTML = "";
-    renderizarProductos();
-  } catch (error) {
-    console.log(error);
-  }
-}
-
-const ordenarProductosDos = lista => {
+/* Ordenar productos */
+const ordenarProductos = lista => {
   switch (ordenador.value){
     case "rec":
       lista.sort((a, b) => b.id - a.id);
@@ -318,54 +298,20 @@ const renderizarFiltroPorMarca = async () => {
       filtroMarca.append(div);
 
       let botonFiltroMarca = document.getElementById(`marca${item.marca}`);
-      botonFiltroMarca.addEventListener("change", () => filtrarCelularesMarca(botonFiltroMarca, botonFiltroMarca.name));
+      botonFiltroMarca.addEventListener("change", () => renderizarProductos());
     }
   })
 }
 
-/* Filtrado de celulares por marca */
-const filtrarCelularesMarca = async () => {
-  try {
-    let response = await fetch("https://raw.githubusercontent.com/diegoderivas/mundo-celular/main/data/products.json");
-    let data = await response.json();
-    productos.innerHTML = "";
-  
-    let checkboxMarca = document.getElementsByClassName("checkboxMarca");
-    let marcasFiltradas = [];
-  
-    for (let elemento of checkboxMarca) {
-      if (elemento.checked) {
-        marcasFiltradas.push(elemento.name);
-      }
+
+/* Nueva función de filtrado de celulares */
+const filtrarCelularesMarca = () => {
+  let checkboxMarca = document.getElementsByClassName("checkboxMarca");
+  let marcasFiltradas = [];
+  for (let elemento of checkboxMarca) {
+    if (elemento.checked) {
+      marcasFiltradas.push(elemento.name);
     }
-  
-    if (marcasFiltradas.length === 0){
-      renderizarProductos();
-    }
-  
-    marcasFiltradas.forEach(marcaFiltrada => {
-      data.forEach(marcaData => {
-        if (marcaFiltrada === marcaData.marca){
-          let article = document.createElement("article");
-          article.classList = "mx-auto";
-          article.innerHTML = `
-          <div class="tarjetaCelular card text-center my-3 mx-auto">
-          <img src="${marcaData.imagen}" class="imgCelular mt-3 mx-auto" alt="${marcaData.marca} ${marcaData.modelo}">
-          <div class="card-body">
-            <h5 class="card-title">${marcaData.marca} ${marcaData.modelo}</h5>
-            <h5>US$${marcaData.precio}</h5>
-            <button type="button" id="${"btnAgregarCarrito" + marcaData.id}" class="btn btn-primary">Agregar al carrito</button>
-          </div>
-        </div>
-          `
-        productos?.append(article);
-        let botonAgregarACarrito = document.getElementById("btnAgregarCarrito" + marcaData.id);
-        botonAgregarACarrito?.addEventListener("click", () => agregarACarrito(marcaData));
-        }
-      })
-    })
-    
-  } catch (error) {
-    console.log(error);
   }
+  return marcasFiltradas;
 }
