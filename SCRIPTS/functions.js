@@ -5,17 +5,7 @@ const renderizarProductos = async () => {
     let data = await results.json();
 
     /* Ordenamiento de celulares */
-    switch (ordenador?.value) {
-      case "rec":
-        data.sort((a, b) => b.id - a.id);
-        break;
-      case "mame":
-        data.sort((a, b) => b.precio - a.precio);
-        break;
-      case "mema":
-        data.sort((a, b) => a.precio - b.precio);
-        break;
-    }
+    ordenarProductosDos(data);
 
     data.forEach(item => {
       let article = document.createElement("article");
@@ -220,6 +210,22 @@ const ordenarProductos = async orden => {
   }
 }
 
+const ordenarProductosDos = lista => {
+  switch (ordenador.value){
+    case "rec":
+      lista.sort((a, b) => b.id - a.id);
+      break;
+    case "mame":
+      lista.sort((a, b) => b.precio - a.precio);
+      break;
+    case "mema":
+      lista.sort((a, b) => a.precio - b.precio);
+      break;
+  }
+  return lista;
+}
+
+
 /* Sumar Item Carrito*/
 const sumarItemCarrito = (producto) => {
   producto.cantidad++;
@@ -353,6 +359,8 @@ const filtrarCelularesMarca = async () => {
         </div>
           `
         productos?.append(article);
+        let botonAgregarACarrito = document.getElementById("btnAgregarCarrito" + marcaData.id);
+        botonAgregarACarrito?.addEventListener("click", () => agregarACarrito(marcaData));
         }
       })
     })
