@@ -9,3 +9,7 @@ const botonBuscador = document.getElementById("botonBuscador");
 const ordenador = document.getElementById("ordenador");
 const ultimosProductos = document.getElementById("ultimosProductos");
 const filtroMarca = document.getElementById("filtroMarca");
+const precioMin = document.getElementById("precioMin");
+const precioMax = document.getElementById("precioMax");
+const botonPrecio = document.getElementById("botonPrecio");
+const botonReestablecerFiltros = document.getElementById("botonReestablecerFiltros");

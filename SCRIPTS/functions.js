@@ -6,30 +6,33 @@ const renderizarProductos = async () => {
 
     /* Buscador de productos */
     let dataBuscada = buscarProductos(data);
-    
+
     /* Filtrado de productos por marca*/
     let marcas = filtrarCelularesMarca();
-    let dataFiltrada = [];
-    if (marcas.length > 0){
+    let dataFiltradaMarca = [];
+    if (marcas.length > 0) {
       marcas.forEach(marcaAFiltrar => {
         dataBuscada.forEach(cel => {
-          if (cel.marca === marcaAFiltrar){
-            dataFiltrada.push(cel);
+          if (cel.marca === marcaAFiltrar) {
+            dataFiltradaMarca.push(cel);
           }
         })
       })
     } else {
-      dataFiltrada = dataBuscada;
+      dataFiltradaMarca = dataBuscada;
     }
-    
-    ordenarProductos(dataFiltrada);
-    if (dataFiltrada.length == 0){
+
+    /* Filtrado de celulares por precio */
+    let dataFiltradaPrecio = filtrarCelularesPrecio(dataFiltradaMarca);
+
+    ordenarProductos(dataFiltradaPrecio);
+    if (dataFiltradaPrecio.length === 0) {
       productos.className = "col-lg text-center mt-3";
       productos.innerHTML = "<h2>No se han encontrado productos</h2>"
     } else {
       productos.innerHTML = "";
       productos.className = "p-0 mx-auto row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xxl-4 col-lg"
-      dataFiltrada.forEach(item => {
+      dataFiltradaPrecio.forEach(item => {
         let article = document.createElement("article");
         article.classList = "mx-auto"
         article.innerHTML = `
@@ -191,7 +194,7 @@ const buscarProductos = lista => {
 
 /* Ordenar productos */
 const ordenarProductos = lista => {
-  switch (ordenador.value){
+  switch (ordenador.value) {
     case "rec":
       lista.sort((a, b) => b.id - a.id);
       break;
@@ -303,8 +306,7 @@ const renderizarFiltroPorMarca = async () => {
   })
 }
 
-
-/* Nueva función de filtrado de celulares */
+/* Filtro de celulares por marca */
 const filtrarCelularesMarca = () => {
   let checkboxMarca = document.getElementsByClassName("checkboxMarca");
   let marcasFiltradas = [];
@@ -314,4 +316,27 @@ const filtrarCelularesMarca = () => {
     }
   }
   return marcasFiltradas;
+}
+
+/* Filtro de celulares por precio */
+const filtrarCelularesPrecio = lista => {
+  if (precioMin.value.length === 0 && precioMax.value.length === 0) {
+    return lista
+  } else {
+    let filtrado = lista.filter(cel => (cel.precio >= precioMin.value) && (cel.precio <= precioMax.value));
+    return filtrado;
+  }
+}
+
+const reestablecerFiltros = () => {
+  formBuscador.value = "";
+  ordenador.innerHTML = `
+  <option selected value="rec">Agregados recientemente</option>
+  <option value="mame">Precio: mayor a menor</option>
+  <option value="mema">Precio: menor a mayor</option>`
+  filtroMarca.innerHTML = "";
+  renderizarFiltroPorMarca();
+  precioMin.value = "";
+  precioMax.value = "";
+  renderizarProductos();
 }

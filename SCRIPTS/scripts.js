@@ -18,7 +18,7 @@ botonVaciarCarrito.addEventListener("click", vaciarCarrito);
 botonBuscador?.addEventListener("click", () => renderizarProductos());
 
 formBuscador?.addEventListener("keypress", (e) => {
-  if (e.code === "Enter") {
+  if (e.code === "Enter" || e.code === "NumpadEnter") {
     e.preventDefault();
     renderizarProductos();
   }
@@ -26,3 +26,22 @@ formBuscador?.addEventListener("keypress", (e) => {
 
 /* Ordenador */
 ordenador?.addEventListener("change",() => renderizarProductos());
+
+/* Filtrado de celulares por precio */
+botonPrecio.addEventListener("click",() => renderizarProductos());
+
+precioMin?.addEventListener("keypress", (e) => {
+  if (e.code === "Enter" || e.code === "NumpadEnter") {
+    console.log("enter")
+    renderizarProductos();
+  }
+});
+
+precioMax?.addEventListener("keypress", (e) => {
+  if (e.code === "Enter" || e.code === "NumpadEnter") {
+    renderizarProductos();
+  }
+});
+
+/* Reestablecer filtros */
+botonReestablecerFiltros.addEventListener("click",() => reestablecerFiltros());
