@@ -1,7 +1,7 @@
 /* Renderizado de celulares */
 const renderizarProductos = async () => {
   try {
-    let results = await fetch("https://raw.githubusercontent.com/diegoderivas/mundo-celular/main/data/products.json");
+    let results = await fetch("https://raw.githubusercontent.com/diegoderivas/mundo-celular2/main/data/products.json");
     let data = await results.json();
 
     /* Buscador de productos */
@@ -244,7 +244,7 @@ const quitarItemCarrito = (producto) => {
 /* Renderizar últimos productos (solo para index.html) */
 const renderizarUltimosProductos = async () => {
   try {
-    let results = await fetch("https://raw.githubusercontent.com/diegoderivas/mundo-celular/main/data/products.json");
+    let results = await fetch("https://raw.githubusercontent.com/diegoderivas/mundo-celular2/main/data/products.json");
     let data = await results.json();
     let ultProds = [];
     for (let i = data.length - 1; i > data.length - 5; i--) {
@@ -274,7 +274,7 @@ const renderizarUltimosProductos = async () => {
 
 /* Renderizado de filtro por marca */
 const renderizarFiltroPorMarca = async () => {
-  let response = await fetch("https://raw.githubusercontent.com/diegoderivas/mundo-celular/main/data/products.json");
+  let response = await fetch("https://raw.githubusercontent.com/diegoderivas/mundo-celular2/main/data/products.json");
   let data = await response.json();
   let marcas = [];
 

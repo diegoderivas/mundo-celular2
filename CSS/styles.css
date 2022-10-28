@@ -17,6 +17,23 @@ header{
   background-color: #302f4e;
 }
 
+.nav-link{
+  color:#ee8968;
+  font-weight: bold;
+}
+
+.nav-link:hover{
+  color: #ee8968;
+}
+
+.navbar-toggler{
+  border: 1px #ee8968 solid;
+}
+
+.bi-list{
+  color:#ee8968;
+}
+
 /* Carrito y lupa */
 .carrito{
   font-size: 1.5rem;

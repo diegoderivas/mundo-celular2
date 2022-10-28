@@ -28,7 +28,7 @@ formBuscador?.addEventListener("keypress", (e) => {
 ordenador?.addEventListener("change",() => renderizarProductos());
 
 /* Filtrado de celulares por precio */
-botonPrecio.addEventListener("click",() => renderizarProductos());
+botonPrecio?.addEventListener("click",() => renderizarProductos());
 
 precioMin?.addEventListener("keypress", (e) => {
   if (e.code === "Enter" || e.code === "NumpadEnter") {
@@ -44,4 +44,4 @@ precioMax?.addEventListener("keypress", (e) => {
 });
 
 /* Reestablecer filtros */
-botonReestablecerFiltros.addEventListener("click",() => reestablecerFiltros());
+botonReestablecerFiltros?.addEventListener("click",() => reestablecerFiltros());
