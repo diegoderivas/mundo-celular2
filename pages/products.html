@@ -27,43 +27,56 @@
 <!-- Body -->
 <body>
   <!-- Cabecera del sitio -->
-  <header class="d-flex justify-content-between">
+  <header class="container-fluid justify-content-between">
     <!-- Logo y menú de navegación -->
-    <nav class="navbar navbar-expand-lg">
-      <a href="../index.html"><img class="m-3" src="https://res.cloudinary.com/dsmpqr05e/image/upload/v1664402400/Mundo%20Celular/Logo_Mundo_Celular_tkrdix.png" alt="logo"></a>
-      <div class="container-fluid">
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
+    <div class="row">
+      <nav class="navbar navbar-expand-lg col d-flex justify-content-start ms-2">
+        <button class="navbar-toggler py-1 px-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <i class="bi bi-list fs-2"></i>
         </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="../index.html">Inicio</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-decoration-underline" href="products.html">Productos</a>
-            </li>
-          </ul>
+        <a href="../index.html"><img class="m-3" src="https://res.cloudinary.com/dsmpqr05e/image/upload/v1664402400/Mundo%20Celular/Logo_Mundo_Celular_tkrdix.png" alt="logo"></a>
+      
+      <!-- Menú de navegación para escritorio -->
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-none d-lg-flex">
+        <li class="nav-item">
+          <a class="nav-link text-center" aria-current="page" href="../index.html">Inicio</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-center text-decoration-underline" href="products.html">Productos</a>
+        </li>
+      </ul>
+      </nav>
+      
+      <!-- Botón Carrito -->
+      <div class="align-self-center col-3 col-sm-2 px-0 d-flex justify-content-end">
+        <button id="botonCarrito" type="button" class="btn btn-outline-primary position-relative align-self-center me-4" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+          <i class="bi bi-cart carrito"></i>
+          <span id="numeroCarrito" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"></span>
+        </button>
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasRightLabel">Carrito de Compras</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+          </div>
+          <div id="contenidoCarrito" class="offcanvas-body contenidoCarrito"></div>
+          <div class="d-flex align-self-center mb-3">
+            <button id="botonVaciarCarrito" type="button" class="btn btn-warning">Vaciar Carrito</button>
+          </div>
         </div>
-      </div>
-    </nav>
-
-    <!-- Botón Carrito -->
-    <button id="botonCarrito" type="button" class="btn btn-outline-primary position-relative align-self-center m-4" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
-      <i class="bi bi-cart carrito"></i>
-      <span id="numeroCarrito" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"></span>
-    </button>
-    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
-      <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasRightLabel">Carrito de Compras</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-      </div>
-      <div id="contenidoCarrito" class="offcanvas-body contenidoCarrito"></div>
-      <div class="d-flex align-self-center mb-3">
-        <button id="botonVaciarCarrito" type="button" class="btn btn-warning">Vaciar Carrito</button>
       </div>
     </div>
 
+    <!-- Menú de navegación para móviles y tablets (cuando se abre el menú hamburguesa) -->
+    <div class="collapse navbar-collapse row d-lg-none" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link text-center" aria-current="page" href="../index.html">Inicio</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-center text-decoration-underline " href="products.html">Productos</a>
+        </li>
+      </ul>
+    </div>
 </header>
 
   <!-- Main -->
@@ -116,8 +129,9 @@
             </div>
           </div>
         </div>
-        <button id="botonReestablecerFiltros" class="btnReestablecerFiltros my-2 ms-2 text-danger"><i class="bi bi-x-lg"></i> Reestablecer filtros</button>
-        
+        <div class="d-flex justify-content-center justify-content-lg-start">
+          <button id="botonReestablecerFiltros" class="btnReestablecerFiltros my-2 ms-2 text-danger"><i class="bi bi-x-lg"></i> Reestablecer filtros</button>
+        </div>
       </aside>
       <!-- Productos -->
       <section id="productos" class="p-0 mx-auto row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xxl-4 col-lg"></section>
@@ -125,11 +139,11 @@
   </main>
 
   <!-- Footer -->
-  <footer class="d-flex justify-content-between align-items-center">
+  <footer class="d-flex flex-column flex-md-row justify-content-between align-items-center">
     <a href="../index.html"><img class="m-3 imgFooter" src="https://res.cloudinary.com/dsmpqr05e/image/upload/v1664402400/Mundo%20Celular/Logo_Mundo_Celular_tkrdix.png" alt="logo"></a>
     <span class="txFooter ">Copyright ©2022 Todos los derechos reservados</span>
     <!-- Redes -->
-    <div class="redes">
+    <div class="redes my-3">
       <a href="https://facebook.com" target="_blank"><img class="logoRedes me-2" src="https://cdn-icons-png.flaticon.com/512/3670/3670144.png" alt="Facebook"></a>
       <a href="https://instagram.com" target="_blank"><img class="logoRedes me-2" src="https://cdn-icons-png.flaticon.com/512/3670/3670125.png" alt="Instagram"></a>
       <a href="https://twitter.com" target="_blank"><img class="logoRedes me-3" src="https://cdn-icons-png.flaticon.com/512/145/145812.png" alt="Twitter"></a>
