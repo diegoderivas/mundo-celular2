@@ -85,7 +85,7 @@ const agregarACarrito = producto => {
     position: "left",
     stopOnFocus: true,
     style: {
-      background: "linear-gradient(to right, #00b09b, #96c93d)",
+      background: "linear-gradient(to right, #f19a71, #e58566, #d86f5d, #ca5a55, #bb444f)",
     },
     onClick: function () { }
   }).showToast();
@@ -98,26 +98,29 @@ const renderizarCarrito = () => {
   carritoStorage.forEach(item => {
     let article = document.createElement("article");
     article.innerHTML = `
-    <div class="card mb-3" style="max-width: 540px;">
-      <div class="row g-0">
-        <div class="col-md-4 d-flex">
+    <div class="card mb-3 tarjetaCarrito">
+      <div class="row g-0 my-2 my-sm-1 mx-2">
+        <div class="col-sm-1 d-flex justify-content-end d-sm-none">
+          <button id="${"btnQuitarxs" + item.id}" class="btn btn-warning p-1 rounded-5"><i class="bi bi-trash"></i></button>
+        </div>
+        <div class="col-sm-4 d-flex imgCarrito mx-auto">
           <img src="${item.imagen}" class="img-fluid align-self-center" alt="${item.marca} ${item.modelo}">
         </div>
-        <div class="col-md-7">
-          <div class="card-body">
-            <h5 class="card-title">${item.marca} ${item.modelo}</h5>
-            <span>Precio: US$${item.precioUnitario}</span>
-            <div class="d-flex align-items-center my-1">
+        <div class="col-sm-7">
+          <div class="card-body pb-0 pb-sm-3">
+            <h5 class="card-title text-center text-sm-start">${item.marca} ${item.modelo}</h5>
+            <span class="d-block text-center text-sm-start">Precio: US$${item.precioUnitario}</span>
+            <div class="d-flex align-items-center my-1 justify-content-center justify-content-sm-start">
               <span>Cantidad: ${item.cantidad}</span>
               <div>
                 <button id="${"btnRestar" + item.id}" class="btn btn-outline-danger ms-2 rounded-5">-</button>
                 <button id="${"btnSumar" + item.id}" class="btn btn-outline-success rounded-5">+</button>
               </div>
             </div>
-            <span class="fw-bold">Subtotal: US$${item.subtotal}</span>
+            <span class="fw-bold d-block text-center text-sm-start">Subtotal: US$${item.subtotal}</span>
           </div>
         </div>
-        <div class="col-md-1">
+        <div class="col-sm-1 d-none d-sm-block">
           <button id="${"btnQuitar" + item.id}" class="mt-3 btn btn-warning p-1 rounded-5"><i class="bi bi-trash"></i></button>
         </div>
       </div>
@@ -127,12 +130,15 @@ const renderizarCarrito = () => {
     let botonRestarItemCarrito = document.getElementById("btnRestar" + item.id);
     let botonSumarItemCarrito = document.getElementById("btnSumar" + item.id);
     let botonQuitarItemCarrito = document.getElementById("btnQuitar" + item.id);
+    let botonQuitarItemCarritoxs = document.getElementById("btnQuitarxs" + item.id);
     botonRestarItemCarrito.addEventListener("click", () => restarItemCarrito(item));
     botonSumarItemCarrito.addEventListener("click", () => sumarItemCarrito(item));
     botonQuitarItemCarrito.addEventListener("click", () => quitarItemCarrito(item));
+    botonQuitarItemCarritoxs.addEventListener("click", () => quitarItemCarrito(item));
   })
   if (parseInt(numeroCarrito.innerHTML) != 0) {
     botonVaciarCarrito.style.display = "inline";
+    botonConfirmarCompra.style.display = "inline";
   }
   let totalCompra = document.createElement("div");
   let resultado = carritoStorage.reduce((acc, elem) => acc + elem.subtotal, 0);
@@ -141,6 +147,7 @@ const renderizarCarrito = () => {
   if (carritoStorage.length === 0) {
     contenidoCarrito.innerHTML = "<h3>Su carrito está vacío</h3>";
     botonVaciarCarrito.style.display = "none";
+    botonConfirmarCompra.style.display = "none";
   }
 }
 
@@ -171,7 +178,7 @@ const vaciarCarrito = () => {
       Swal.fire(
         '',
         'Su carrito ha sido vaciado',
-        'success'
+        'info'
       )
       localStorage.removeItem("carritoStorage");
       localStorage.setItem("numeroCarritoStorage", 0)
@@ -179,6 +186,7 @@ const vaciarCarrito = () => {
       carritoStorage = [];
       numeroCarrito.innerHTML = 0;
       botonVaciarCarrito.style.display = "none";
+      botonConfirmarCompra.style.display = "none";
     }
   })
 }
@@ -339,4 +347,45 @@ const reestablecerFiltros = () => {
   precioMin.value = "";
   precioMax.value = "";
   renderizarProductos();
+}
+
+/* Confirmar Compra */
+const confirmarCompra = () => {
+  let resultado = carritoStorage.reduce((acc, elem) => acc + elem.subtotal, 0);
+  Swal.fire({
+    title: `Confirmar compra?`,
+    text: `Monto a abonar: US$${resultado}`,
+    icon: 'question',
+    showCancelButton: true,
+    confirmButtonColor: '#198754',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Confirmar',
+    cancelButtonText: 'Cancelar',
+    allowOutsideClick: () => {
+      const popup = Swal.getPopup()
+      popup.classList.remove('swal2-show')
+      setTimeout(() => {
+        popup.classList.add('animate__animated', 'animate__headShake')
+      })
+      setTimeout(() => {
+        popup.classList.remove('animate__animated', 'animate__headShake')
+      }, 500)
+      return false
+    }
+  }).then((result) => {
+    if (result.isConfirmed) {
+      Swal.fire(
+        '',
+        'Su compra ha sido confirmada!',
+        'success'
+      )
+      localStorage.removeItem("carritoStorage");
+      localStorage.setItem("numeroCarritoStorage", 0)
+      contenidoCarrito.innerHTML = `<h3>Su carrito está vacío</h3>`
+      carritoStorage = [];
+      numeroCarrito.innerHTML = 0;
+      botonVaciarCarrito.style.display = "none";
+      botonConfirmarCompra.style.display = "none";
+    }
+  })
 }

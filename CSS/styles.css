@@ -48,6 +48,10 @@ header{
   flex-direction: column;
 }
 
+.tarjetaCarrito{
+  max-width: 400px;
+}
+
 /* Footer */
 footer{
   background-color: #302f4e;
@@ -136,6 +140,12 @@ input[type=number] {
   .imgCelular{
     width: 70vw;
   }
+  
+  .imgCarrito{
+    width:200px
+  }
+  
+  .anchoCien{
+    width: 50px;
+  }
 }
-
-

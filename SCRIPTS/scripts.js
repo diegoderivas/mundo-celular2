@@ -14,6 +14,9 @@ if (parseInt(numeroCarrito.innerHTML) === 0) {
 /* Evento vaciar carrito */
 botonVaciarCarrito.addEventListener("click", vaciarCarrito);
 
+/* Evento Confirmar compra */
+botonConfirmarCompra.addEventListener("click",confirmarCompra);
+
 /* Buscador */
 botonBuscador?.addEventListener("click", () => renderizarProductos());
 

@@ -13,3 +13,4 @@ const precioMin = document.getElementById("precioMin");
 const precioMax = document.getElementById("precioMax");
 const botonPrecio = document.getElementById("botonPrecio");
 const botonReestablecerFiltros = document.getElementById("botonReestablecerFiltros");
+const botonConfirmarCompra = document.getElementById("botonConfirmarCompra");
